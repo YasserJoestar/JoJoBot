@@ -1,5 +1,10 @@
 require("dotenv").config();
-const { Client, IntentsBitField, EmbedBuilder } = require("discord.js");
+const {
+  Client,
+  IntentsBitField,
+  EmbedBuilder,
+  ActivityType,
+} = require("discord.js");
 
 const client = new Client({
   intents: [
@@ -12,7 +17,35 @@ const client = new Client({
 
 client.on("ready", () => {
   console.log("The bot is ready!");
+
+  setInterval(() => {
+    let random = Math.floor(Math.random() * status.length);
+    client.user.setActivity(status[random]);
+  }, 10000);
 });
+
+let status = [
+  {
+    name: "To Girno's Theme",
+    type: ActivityType.Listening,
+    // url: "https://www.twitch.tv/monstercat",
+  },
+  {
+    name: "JoJo All Star",
+    type: ActivityType.Streaming,
+    // url: "https://www.twitch.tv/monstercat",
+  },
+  {
+    name: "JoJo All Star",
+    type: ActivityType.Playing,
+    // url: "https://www.twitch.tv/monstercat",
+  },
+  {
+    name: "JoJo Part 3",
+    type: ActivityType.Watching,
+    // url: "https://www.twitch.tv/monstercat",
+  },
+];
 
 client.on("messageCreate", (message) => {
   if (message.author.bot) return;
